@@ -1,26 +1,30 @@
 package com.appscharles.libs.processer.closers;
 
-import com.appscharles.libs.processer.exceptions.TaskerException;
+import com.appscharles.libs.processer.exceptions.ProcesserException;
+import com.appscharles.libs.processer.killers.IPIDKiller;
 import com.appscharles.libs.processer.searchers.IChildSearcher;
 
 import java.util.List;
 
 /**
- * IDE Editor: IntelliJ IDEA
- * <p>
- * Date: 28.06.2018
- * Time: 13:44
- * Project name: tasker
- *
- * @author Karol Golec karol.itgolo@gmail.com
+ * The type Child closer.
  */
 public class ChildCloser extends AbstractChildCloser {
 
-    public ChildCloser(Long parentPID, IChildSearcher childSearcher) {
-        super(parentPID, childSearcher);
+    /**
+     * Instantiates a new Child closer.
+     *
+     * @param childSearcher the child searcher
+     * @param iPIDKiller    the pid killer
+     */
+    public ChildCloser(IChildSearcher childSearcher, IPIDKiller iPIDKiller) {
+        super(childSearcher, iPIDKiller);
     }
 
-    public void close()throws TaskerException {
-        List<Long> pids = this.childSearcher.search();
+    public void close()throws ProcesserException {
+        List<Long> pIDs = this.childSearcher.search();
+        for (Long pID : pIDs) {
+            this.iPIDKiller.kill(pID);
+        }
     }
 }

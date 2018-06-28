@@ -1,6 +1,6 @@
 package com.appscharles.libs.processer.searchers;
 
-import com.appscharles.libs.processer.exceptions.TaskerException;
+import com.appscharles.libs.processer.exceptions.ProcesserException;
 
 import java.util.List;
 
@@ -15,5 +15,5 @@ import java.util.List;
  */
 public interface IChildSearcher {
 
-    List<Long> search() throws TaskerException;
+    List<Long> search() throws ProcesserException;
 }

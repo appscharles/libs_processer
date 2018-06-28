@@ -3,7 +3,7 @@ package com.appscharles.libs.processer.exceptions;
 /**
  * The type Updater exception.
  */
-public class TaskerException extends Exception {
+public class ProcesserException extends Exception {
     /**
      * The Serial version uid.
      */
@@ -12,7 +12,7 @@ public class TaskerException extends Exception {
     /**
      * Instantiates a new Updater exception.
      */
-    public TaskerException() {
+    public ProcesserException() {
         super();
     }
 
@@ -21,7 +21,7 @@ public class TaskerException extends Exception {
      *
      * @param message the message
      */
-    public TaskerException(String message) {
+    public ProcesserException(String message) {
         super(message);
     }
 
@@ -31,7 +31,7 @@ public class TaskerException extends Exception {
      * @param message the message
      * @param cause   the cause
      */
-    public TaskerException(String message, Throwable cause) {
+    public ProcesserException(String message, Throwable cause) {
         super(message, cause);
     }
 
@@ -40,7 +40,7 @@ public class TaskerException extends Exception {
      *
      * @param cause the cause
      */
-    public TaskerException(Throwable cause) {
+    public ProcesserException(Throwable cause) {
         super(cause);
     }
 }

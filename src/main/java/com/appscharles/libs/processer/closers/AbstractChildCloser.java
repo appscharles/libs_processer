@@ -1,5 +1,6 @@
 package com.appscharles.libs.processer.closers;
 
+import com.appscharles.libs.processer.killers.IPIDKiller;
 import com.appscharles.libs.processer.searchers.IChildSearcher;
 
 /**
@@ -13,13 +14,14 @@ import com.appscharles.libs.processer.searchers.IChildSearcher;
  */
 public abstract class AbstractChildCloser implements IChildCloser {
 
-    protected Long parentPID;
 
     protected IChildSearcher childSearcher;
 
-    public AbstractChildCloser(Long parentPID, IChildSearcher childSearcher) {
-        this.parentPID = parentPID;
+    protected IPIDKiller iPIDKiller;
+
+    public AbstractChildCloser(IChildSearcher childSearcher,IPIDKiller iPIDKiller) {
         this.childSearcher = childSearcher;
+        this.iPIDKiller = iPIDKiller;
     }
 
 }
