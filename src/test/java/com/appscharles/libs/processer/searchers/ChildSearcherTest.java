@@ -21,10 +21,10 @@ import java.io.IOException;
 public class ChildSearcherTest {
 
     @Test
-    public void shouldFoundTwoPIDs() throws ProcesserException, IOException, InterruptedException {
+    public void shouldFoundTwoPIDs() throws ProcesserException, IOException {
         Process process = Runtime.getRuntime().exec("notepad.exe");
         IChildSearcher iChildSearcher = new ChildSearcher(CurrentPIDExtractor.extract(), new CommanderCaller(), new PIDsConverter());
-        Assert.assertEquals(iChildSearcher.search().size(), 3);
+        Assert.assertTrue(iChildSearcher.search().size() >=2 && iChildSearcher.search().size() <=3);
         process.destroyForcibly();
     }
 }
