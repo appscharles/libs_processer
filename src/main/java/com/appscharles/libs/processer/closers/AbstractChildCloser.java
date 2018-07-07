@@ -19,7 +19,7 @@ public abstract class AbstractChildCloser implements IChildCloser {
 
     protected IPIDKiller iPIDKiller;
 
-    public AbstractChildCloser(IChildSearcher childSearcher,IPIDKiller iPIDKiller) {
+    public AbstractChildCloser(IChildSearcher childSearcher, IPIDKiller iPIDKiller) {
         this.childSearcher = childSearcher;
         this.iPIDKiller = iPIDKiller;
     }

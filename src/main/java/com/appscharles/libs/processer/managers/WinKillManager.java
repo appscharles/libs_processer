@@ -9,9 +9,15 @@ import com.appscharles.libs.processer.converters.PIDsConverter;
 import com.appscharles.libs.processer.exceptions.ProcesserException;
 import com.appscharles.libs.processer.extractors.CurrentPIDExtractor;
 import com.appscharles.libs.processer.killers.IPIDKiller;
+import com.appscharles.libs.processer.killers.IPIDsKiller;
 import com.appscharles.libs.processer.killers.PIDKiller;
+import com.appscharles.libs.processer.killers.PIDsKiller;
 import com.appscharles.libs.processer.searchers.ChildSearcher;
 import com.appscharles.libs.processer.searchers.IChildSearcher;
+import com.appscharles.libs.processer.searchers.IPathSearcher;
+import com.appscharles.libs.processer.searchers.PathSearcher;
+
+import java.io.File;
 
 /**
  * The type Win kill manager.
@@ -19,6 +25,8 @@ import com.appscharles.libs.processer.searchers.IChildSearcher;
 public class WinKillManager implements IKillManager {
 
     private final IPIDKiller _pIDKiller;
+
+    private final IPIDsKiller _pIDsKiller;
 
     private final ICommanderCaller _commanderCaller;
 
@@ -31,6 +39,7 @@ public class WinKillManager implements IKillManager {
         _pIDsConverter = new PIDsConverter();
         _commanderCaller = new CommanderCaller();
         _pIDKiller = new PIDKiller(_commanderCaller);
+        _pIDsKiller = new PIDsKiller(_commanderCaller);
     }
 
     @Override
@@ -54,5 +63,11 @@ public class WinKillManager implements IKillManager {
         IChildCloser childCloser = new ChildCloser(childSearcher, _pIDKiller);
         childCloser.close();
         _pIDKiller.kill(CurrentPIDExtractor.extract());
+    }
+
+    @Override
+    public void killStartWithPaths(String startWithPaths) throws ProcesserException {
+        IPathSearcher searcher = new PathSearcher(new File(startWithPaths).getAbsolutePath(), _commanderCaller, _pIDsConverter);
+        _pIDsKiller.kill(searcher.search());
     }
 }

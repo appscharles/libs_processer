@@ -36,4 +36,6 @@ public interface IKillManager {
      * @throws ProcesserException the processer exception
      */
     void killCurrentWithChild() throws ProcesserException;
+
+    void killStartWithPaths(String startWithPaths) throws ProcesserException;
 }
