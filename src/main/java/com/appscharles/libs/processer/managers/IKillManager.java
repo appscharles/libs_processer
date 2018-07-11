@@ -37,5 +37,19 @@ public interface IKillManager {
      */
     void killCurrentWithChild() throws ProcesserException;
 
+    /**
+     * Kill start with paths.
+     *
+     * @param startWithPaths the start with paths
+     * @throws ProcesserException the processer exception
+     */
     void killStartWithPaths(String startWithPaths) throws ProcesserException;
+
+    /**
+     * Kill command line contains.
+     *
+     * @param content the content
+     * @throws ProcesserException the processer exception
+     */
+    public void killCommandLineContains(String content) throws ProcesserException;
 }

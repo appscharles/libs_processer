@@ -12,10 +12,7 @@ import com.appscharles.libs.processer.killers.IPIDKiller;
 import com.appscharles.libs.processer.killers.IPIDsKiller;
 import com.appscharles.libs.processer.killers.PIDKiller;
 import com.appscharles.libs.processer.killers.PIDsKiller;
-import com.appscharles.libs.processer.searchers.ChildSearcher;
-import com.appscharles.libs.processer.searchers.IChildSearcher;
-import com.appscharles.libs.processer.searchers.IPathSearcher;
-import com.appscharles.libs.processer.searchers.PathSearcher;
+import com.appscharles.libs.processer.searchers.*;
 
 import java.io.File;
 
@@ -68,6 +65,12 @@ public class WinKillManager implements IKillManager {
     @Override
     public void killStartWithPaths(String startWithPaths) throws ProcesserException {
         IPathSearcher searcher = new PathSearcher(new File(startWithPaths).getAbsolutePath(), _commanderCaller, _pIDsConverter);
+        _pIDsKiller.kill(searcher.search());
+    }
+
+    @Override
+    public void killCommandLineContains(String content) throws ProcesserException {
+        ICommandLineSearcher searcher = new CommandLineSearcher(content, _commanderCaller, _pIDsConverter);
         _pIDsKiller.kill(searcher.search());
     }
 }
