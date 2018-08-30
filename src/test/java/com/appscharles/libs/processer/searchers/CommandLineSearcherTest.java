@@ -8,6 +8,7 @@ import com.appscharles.libs.processer.converters.PIDsConverter;
 import com.appscharles.libs.processer.exceptions.ProcesserException;
 import com.appscharles.libs.processer.killers.PIDsKiller;
 import com.appscharles.libs.processer.programs.tester.Tester;
+import org.junit.Assert;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
@@ -40,8 +41,9 @@ public class CommandLineSearcherTest {
         jarCreator.create();
         Runtime.getRuntime().exec("java -jar " + jarFile.getPath() + " --testCommandLine");
         Thread.sleep(1000);
-        ICommandLineSearcher searcher = new CommandLineSearcher(jarFile.getAbsolutePath().replace("\\", "\\\\"), new CommanderCaller(), new PIDsConverter());
+        ICommandLineSearcher searcher = new CommandLineSearcher(jarFile.getParentFile().getAbsolutePath().replace("\\", "\\\\"), new CommanderCaller(), new PIDsConverter());
         List<Long> pIDs = searcher.search();
+        Assert.assertEquals(pIDs.size(),1);
         new PIDsKiller(new CommanderCaller()).kill(pIDs);
     }
 }
